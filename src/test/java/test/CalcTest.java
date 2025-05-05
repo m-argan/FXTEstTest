@@ -190,6 +190,7 @@ class CalcTest
 		robot.clickOn("#divButton");
 		checkAns(robot, "0.5");
 		
+		// check divide again
 		enterAmt(robot, "10", "5");
 		robot.clickOn("#divButton");
 		checkAns(robot, "2");
