@@ -4,6 +4,7 @@ import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.TextField;
 
 public class CalcModel
 {
@@ -24,13 +25,13 @@ public class CalcModel
 	public void subtract()
 	{
 		result.setValue(num1.doubleValue()-num2.doubleValue());
-		operations.add(new Operation(num1.doubleValue()," - ",num1.doubleValue(),result.doubleValue()));
+		operations.add(new Operation(num1.doubleValue()," - ",num2.doubleValue(),result.doubleValue()));
 	}
 
 	public void multiply()
 	{
 		result.setValue(num1.doubleValue()*num2.doubleValue());
-		operations.add(new Operation(num1.doubleValue()," + ",num2.doubleValue(),result.doubleValue()));
+		operations.add(new Operation(num1.doubleValue()," * ",num2.doubleValue(),result.doubleValue()));
 	}
 
 	public void divide()

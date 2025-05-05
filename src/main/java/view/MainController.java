@@ -3,6 +3,7 @@ package view;
 import javafx.beans.binding.Bindings;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
@@ -33,17 +34,28 @@ public class MainController
 	{
 		this.model = model;
 		
-		
 		StringConverter<Number> converter = new NumberStringConverter();
 		Bindings.bindBidirectional(NumOneTF.textProperty(), model.getNum1(),converter);
-		
+			
 		Bindings.bindBidirectional(NumTwoTF.textProperty(), model.getNum2(),converter);
-		
+			
 		Bindings.bindBidirectional(ResultLabel.textProperty(), model.getResult(),converter);
-		
-		
 		HistoryView.setItems(model.getOperations());	
+		
+		
 	}
+	
+    @FXML
+    private Button addButton;
+
+    @FXML
+    private Button divButton;
+
+    @FXML
+    private Button multButton;
+
+    @FXML
+    private Button subButton;
 
 	@FXML
 	void onAddButton(ActionEvent event)
@@ -66,7 +78,7 @@ public class MainController
 	@FXML
     void onDivideButton(ActionEvent event) 
 	{
-		model.multiply();
+		model.divide();
     }
 
 	

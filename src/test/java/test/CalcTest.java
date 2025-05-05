@@ -2,14 +2,28 @@ package test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.io.IOException;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.testfx.api.FxRobot;
+import org.testfx.assertions.api.Assertions;
+import org.testfx.framework.junit5.ApplicationExtension;
+import org.testfx.framework.junit5.Start;
 
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
 import model.CalcModel;
 import model.Operation;
+import view.MainController;
 
+@ExtendWith(ApplicationExtension.class)
 class CalcTest
 {
 
@@ -19,7 +33,7 @@ class CalcTest
 	}
 
 	@Test
-	void test()
+	void testModel()
 	{
 		// test toString
 		Operation testToString = new Operation(1,"+",2,3);
@@ -109,15 +123,78 @@ class CalcTest
 		// cannot be divided
 		num1 = new SimpleDoubleProperty(1);
 		num2 = new SimpleDoubleProperty(0);
-		//result = new SimpleDoubleProperty("Infinity");
 		model.setNum1(num1);
 		model.setNum2(num2);
 		model.divide();
 		assertTrue(model.getResult().getValue().isInfinite());
-		
-		// 
-		
-		
 	}
+	
+	
+	@Start  //Before
+	  private void start(Stage stage)
+	  {
+		FXMLLoader loader = new FXMLLoader();
+	    loader.setLocation(MainController.class.getResource("main.fxml"));
+	    BorderPane view = null;
+		try
+		{
+			view = loader.load();
+		} catch (IOException e)
+		{
+			e.printStackTrace();
+		}
+	    MainController cont = loader.getController();
+	    CalcModel model =new CalcModel(); 
+	    cont.setModel(model);
+	    
+	    Scene s = new Scene(view);
+	    stage.setScene(s);
+	    stage.show();
+	  
+	  }
+	
+	private void enterAmt(FxRobot robot, String num1, String num2)
+	{
+		robot.clickOn("#NumOneTF");
+		robot.write(num1);
+		robot.clickOn("#NumTwoTF");
+		robot.write(num2);
+	}
+	
+	private void checkAns(FxRobot robot,String ans)
+	  {
+	    Assertions.assertThat(robot.lookup("#ResultLabel")
+	        .queryAs(Label.class)).hasText(ans);    
+	  }
+	
+	@Test
+	  public void testCalculations(FxRobot robot)
+	  {
+		// check add
+		enterAmt(robot, "5", "10");
+		robot.clickOn("#addButton");
+		checkAns(robot, "15");
+		
+		// check subtract
+		enterAmt(robot, "5", "10");
+		robot.clickOn("#subButton");
+		checkAns(robot, "-5");
+	    
+		// check multiply
+		enterAmt(robot, "10", "2");
+		robot.clickOn("#multButton");
+		checkAns(robot, "20");
+	    
+		// check divide
+		enterAmt(robot, "5", "10");
+		robot.clickOn("#divButton");
+		checkAns(robot, "0.5");
+		
+		enterAmt(robot, "10", "5");
+		robot.clickOn("#divButton");
+		checkAns(robot, "2");
+	    
+	    
+	  }
 
 }

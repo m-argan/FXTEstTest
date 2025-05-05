@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane prefHeight="326.0" prefWidth="717.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainController">
+<BorderPane prefHeight="326.0" prefWidth="717.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.MainController">
    <top>
       <Label text="Miraculous Calculator" BorderPane.alignment="CENTER">
          <font>
@@ -24,22 +24,22 @@
          <right>
             <VBox prefHeight="200.0" prefWidth="64.0" BorderPane.alignment="CENTER">
                <children>
-                  <Button mnemonicParsing="false" onAction="#onAddButton" prefHeight="64.0" prefWidth="64.0" text="+">
+                  <Button fx:id="addButton" mnemonicParsing="false" onAction="#onAddButton" prefHeight="64.0" prefWidth="64.0" text="+">
                      <font>
                         <Font size="30.0" />
                      </font>
                   </Button>
-                  <Button alignment="CENTER" mnemonicParsing="false" onAction="#onSubButton" prefHeight="64.0" prefWidth="64.0" text="-" textAlignment="JUSTIFY">
+                  <Button fx:id="subButton" alignment="CENTER" mnemonicParsing="false" onAction="#onSubButton" prefHeight="64.0" prefWidth="64.0" text="-" textAlignment="JUSTIFY">
                      <font>
                         <Font size="30.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#onMultiplyButton" prefHeight="64.0" prefWidth="64.0" text="*">
+                  <Button fx:id="multButton" mnemonicParsing="false" onAction="#onMultiplyButton" prefHeight="64.0" prefWidth="64.0" text="*">
                      <font>
                         <Font size="30.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#onDivideButton" prefHeight="64.0" prefWidth="64.0" text="/">
+                  <Button fx:id="divButton" mnemonicParsing="false" onAction="#onDivideButton" prefHeight="64.0" prefWidth="64.0" text="/">
                      <font>
                         <Font size="30.0" />
                      </font>
